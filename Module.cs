@@ -22,7 +22,7 @@ namespace RazorWebModule
         /// </summary>
         public string DisplayName { get; internal set; }
 
-        private Dictionary<string, View> views;
+        public Dictionary<string, View> Views { get; internal set; }
 
         /// <summary>
         /// protected constructor
@@ -33,7 +33,7 @@ namespace RazorWebModule
         {
             this.Name = name;
             this.DisplayName = displayname;
-            this.views = new Dictionary<string, View>();
+            this.Views = new Dictionary<string, View>();
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace RazorWebModule
         /// <param name="view"></param>
         public void AddView(View view)
         {
-            views.Add(view.Name, view);
+            Views.Add(view.Name, view);
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace RazorWebModule
         {
             string result = null;
             View view = null;
-            views.TryGetValue(name, out view);
+            Views.TryGetValue(name, out view);
             if (view != null)
             {
                 result = view.Render();
@@ -72,7 +72,7 @@ namespace RazorWebModule
         {
             string result = null;
             View view = null;
-            views.TryGetValue(viewName, out view);
+            Views.TryGetValue(viewName, out view);
             if (view != null)
             {
                 IComponentContainer component = view.GetComponent(componentName, view.RootComponent);

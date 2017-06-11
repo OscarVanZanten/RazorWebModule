@@ -68,6 +68,7 @@
     <Compile Include="Components\Component.cs" />
     <Compile Include="Components\ComponentContainer.cs" />
     <Compile Include="Components\ComponentContainerGroup.cs" />
+    <Compile Include="Components\Generic\TextComponent.cs" />
     <Compile Include="Components\IComponent.cs" />
     <Compile Include="Components\IComponentContainer.cs" />
     <Compile Include="Module.cs" />
