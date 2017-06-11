@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 
+using RazorWebModule.Components;
+
 namespace RazorWebModule.Views
 {
     /// <summary>
@@ -20,6 +22,11 @@ namespace RazorWebModule.Views
         public string DisplayName { get; internal set; }
 
         /// <summary>
+        /// The root of component tree
+        /// </summary>
+        public ComponentContainerGroup RootComponent { get; internal set; }
+
+        /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="name">name of the view</param>
@@ -28,6 +35,16 @@ namespace RazorWebModule.Views
         {
             this.Name = name;
             this.DisplayName = displayname;
+            this.RootComponent = new ComponentContainerGroup();
+        }
+
+        /// <summary>
+        /// renders view through the component tree
+        /// </summary>
+        /// <returns></returns>
+        public string Render()
+        {
+            return RootComponent.Render();
         }
     }
 }
