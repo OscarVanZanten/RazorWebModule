@@ -14,15 +14,17 @@ namespace RazorWebModule.Components
         /// <summary>
         /// List of components
         /// </summary>
-        private List<IComponentContainer> components;
+        public List<IComponentContainer> Components { get; internal set; }
+        public string Name { get; internal set; }
 
         /// <summary>
         /// constructors
         /// </summary>
-        public ComponentContainerGroup() : this(new List<IComponentContainer>()) { }
-        public ComponentContainerGroup(List<IComponentContainer> components)
+        public ComponentContainerGroup(string name) : this(name, new List<IComponentContainer>()) { }
+        public ComponentContainerGroup(string name, List<IComponentContainer> components)
         {
-            this.components = components;
+            this.Components = components;
+            this.Name = name;
         }
 
         /// <summary>
@@ -31,7 +33,7 @@ namespace RazorWebModule.Components
         /// <param name="component">component to be added</param>
         public void AddComponent(IComponentContainer component)
         {
-            components.Add(component);
+            Components.Add(component);
         }
 
         /// <summary>
@@ -50,7 +52,7 @@ namespace RazorWebModule.Components
             string html = divStart;
 
             // Cycles through all components
-            foreach (IComponentContainer component in components)
+            foreach (IComponentContainer component in Components)
             {
                 // Render component and add it the html
                 html += component.Render();

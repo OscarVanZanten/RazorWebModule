@@ -93,7 +93,7 @@ namespace RazorWebModule.Components
         /// <summary>
         /// Cleans up the data after compiling
         /// </summary>
-        private void CleanUp()
+        protected virtual void CleanUp()
         {
             model = default(T);
             bag = new DynamicViewBag();

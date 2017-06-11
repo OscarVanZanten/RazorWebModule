@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using RazorWebModule.Views;
 using RazorWebModule.Util;
+using RazorWebModule.Components;
 
 namespace RazorWebModule
 {
@@ -56,6 +57,28 @@ namespace RazorWebModule
             if (view != null)
             {
                 result = view.Render();
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the renedered compoennt
+        /// </summary>
+        /// <param name="viewName">name of the view</param>
+        /// <param name="componentName">name of the component</param>
+        /// <returns>rendred component</returns>
+        public string GetComponent(string viewName, string componentName)
+        {
+            string result = null;
+            View view = null;
+            views.TryGetValue(viewName, out view);
+            if (view != null)
+            {
+                IComponentContainer component = view.GetComponent(componentName, view.RootComponent);
+                if (component != null)
+                {
+                    result = component.Render();
+                }
             }
             return result;
         }

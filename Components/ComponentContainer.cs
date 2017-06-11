@@ -14,6 +14,8 @@ namespace RazorWebModule.Components
         // Component
         private IComponent component;
 
+        public string Name { get { return component.Name; } }
+
         /// <summary>
         /// bootstrap offsets
         /// </summary>
@@ -39,6 +41,7 @@ namespace RazorWebModule.Components
                 throw new ArgumentException("Int array offset must have the length of 4");
             }
         }
+
 
         /// <summary>
         /// Renders the container
