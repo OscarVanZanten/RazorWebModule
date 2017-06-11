@@ -11,7 +11,7 @@ namespace RazorWebModule.Components
     /// <summary>
     /// Basic Component
     /// </summary>
-    public abstract class Component<T>
+    public abstract class Component<T> : IComponent
     {
         /// <summary>
         /// Name of the component
