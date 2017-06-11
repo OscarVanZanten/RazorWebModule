@@ -47,5 +47,14 @@ namespace RazorWebModule.Util
             return result;
         }
 
+        /// <summary>
+        /// Checks if contains a key
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns>if contains a key</returns>
+        public bool Has(string name)
+        {
+            return items.ContainsKey(name);
+        }
     }
 }

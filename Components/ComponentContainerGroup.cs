@@ -9,7 +9,7 @@ namespace RazorWebModule.Components
     /// <summary>
     /// Container that holds a list of component containers and renders this
     /// </summary>
-    class ComponentContainerGroup : IComponentContainer
+    public class ComponentContainerGroup : IComponentContainer
     {
         /// <summary>
         /// List of components

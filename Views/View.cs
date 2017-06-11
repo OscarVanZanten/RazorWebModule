@@ -9,7 +9,7 @@ namespace RazorWebModule.Views
     /// <summary>
     /// RazorView
     /// </summary>
-    class View
+    public class View
     {
         /// <summary>
         /// Name of the view
