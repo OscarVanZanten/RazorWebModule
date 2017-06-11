@@ -33,6 +33,7 @@ namespace RazorWebModule
         {
             this.Name = name;
             this.DisplayName = displayname;
+            this.views = new Dictionary<string, View>();
         }
 
         /// <summary>

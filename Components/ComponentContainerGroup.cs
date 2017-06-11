@@ -37,6 +37,15 @@ namespace RazorWebModule.Components
         }
 
         /// <summary>
+        /// adds a component to the list
+        /// </summary>
+        /// <param name="component">component to be added</param>
+        public void AddComponent(IComponent component, int[] width, int[] offset)
+        {
+            Components.Add(new ComponentContainer(component, width,offset));
+        }
+
+        /// <summary>
         /// renders the components
         /// </summary>
         /// <returns>row filled with components</returns>

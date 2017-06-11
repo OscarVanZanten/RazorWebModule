@@ -15,8 +15,31 @@ namespace RazorWebModule
     /// </summary>
     public abstract class ModuleController : Controller
     {
-        public static Registry<Module> ModuleRegistry = new Registry<Module>();
+        /// <summary>
+        /// Module registry, holds all modules
+        /// </summary>
+        public static Registry<Module> ModuleRegistry { get; internal set; }
 
+        /// <summary>
+        /// State to check if the modules have been initiated
+        /// </summary>
+        private static bool initiated = false;
+
+        /// <summary>
+        /// Defualt constructor
+        /// </summary>
+        public ModuleController()
+        {
+            // Initiates modules on the first time
+            if (!initiated)
+            {
+                ModuleRegistry = new Registry<Module>();
+                InitModules();
+                initiated = true;
+            }
+        }
+
+        public abstract void InitModules();
         /// <summary>
         /// Gets a view from a module
         /// </summary>
