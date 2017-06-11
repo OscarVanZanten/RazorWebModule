@@ -56,5 +56,14 @@ namespace RazorWebModule.Util
         {
             return items.ContainsKey(name);
         }
+
+        /// <summary>
+        /// Gets all keys from registry
+        /// </summary>
+        /// <returns>list of keys</returns>
+        public List<string> GetKeys()
+        {
+            return items.Keys.ToList();
+        }
     }
 }
