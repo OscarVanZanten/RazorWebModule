@@ -42,5 +42,22 @@ namespace RazorWebModule
         {
             views.Add(view.Name, view);
         }
+
+        /// <summary>
+        /// gets the rendered view
+        /// </summary>
+        /// <param name="name">name of view</param>
+        /// <returns>rendered view</returns>
+        public string GetView(string name)
+        {
+            string result = null;
+            View view = null;
+            views.TryGetValue(name, out view);
+            if (view != null)
+            {
+                result = view.Render();
+            }
+            return result;
+        }
     }
 }
