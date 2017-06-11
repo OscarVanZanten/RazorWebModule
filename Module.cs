@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace RazorModule
+namespace RazorWebModule
 {
     /// <summary>
     /// Module class represeting a list of razor views
     /// </summary>
-    class Module
+    public class Module
     {
         /// <summary>
         /// Module name

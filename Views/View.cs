@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace RazorModule.Views
+namespace RazorWebModule.Views
 {
     /// <summary>
     /// RazorView
