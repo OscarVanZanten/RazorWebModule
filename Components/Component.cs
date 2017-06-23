@@ -52,22 +52,22 @@ namespace RazorWebModule.Components
         /// <returns>Compiled component in string form</returns>
         public string Compile()
         {
-            CollectData();
-            ValidateData();
+            CollectRenderData();
+            ValidateRenderData();
             string result = Render();
-            CleanUp();
+            CleanUpRenderData();
             return result;
         }
 
         /// <summary>
-        /// Collects all data needed
+        /// Collects all data needed for rendering
         /// </summary>
-        protected abstract void CollectData();
+        protected abstract void CollectRenderData();
 
         /// <summary>
-        /// Validates data needed
+        /// Validates render data needed
         /// </summary>
-        protected abstract void ValidateData();
+        protected abstract void ValidateRenderData();
 
         /// <summary>
         /// Rendering the component
@@ -93,10 +93,46 @@ namespace RazorWebModule.Components
         /// <summary>
         /// Cleans up the data after compiling
         /// </summary>
-        protected virtual void CleanUp()
+        protected virtual void CleanUpRenderData()
         {
             model = default(T);
             bag = new DynamicViewBag();
         }
+
+        /// <summary>
+        /// Processes a form being inputted
+        /// </summary>
+        /// <param name="data">Data from the form</param>
+        public void ProcessForm(Dictionary<string, string> data)
+        {
+            CollectFormData(data);
+            ValidateFormData(data);
+            ExecuteFormData(data);
+            CleanUpFormData(data);
+        }
+
+        /// <summary>
+        /// Collects all data needed using form data
+        /// </summary>
+        /// <param name="data">Data from the form</param>
+        protected virtual void CollectFormData(Dictionary<string, string> data) { }
+
+        /// <summary>
+        /// Validates form data needed
+        /// </summary>
+        /// <param name="data">Data from the form</param>
+        protected virtual void ValidateFormData(Dictionary<string, string> data) { }
+
+        /// <summary>
+        /// Executes and applies the data collected through the form
+        /// </summary>
+        /// <param name="data">Data from the form</param>
+        protected virtual void ExecuteFormData(Dictionary<string, string> data) { }
+
+        /// <summary>
+        /// Cleans up all data gained from the form
+        /// </summary>
+        /// <param name="data">Data from the form</param>
+        protected virtual void CleanUpFormData(Dictionary<string, string> data) { }
     }
 }

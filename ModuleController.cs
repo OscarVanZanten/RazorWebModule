@@ -7,6 +7,8 @@ using System.Web;
 using System.Web.Mvc;
 
 using RazorWebModule.Util;
+using RazorWebModule.Components;
+using RazorWebModule.Views;
 
 namespace RazorWebModule
 {
@@ -46,7 +48,7 @@ namespace RazorWebModule
         /// <param name="moduleName">name of module</param>
         /// <param name="viewName">name of the view</param>
         /// <returns>rendered view in html code</returns>
-        public virtual ActionResult GetView(string moduleName, string viewName)
+        public ContentResult GetView(string moduleName, string viewName)
         {
             // Gets module
             Module module = ModuleRegistry.Get(moduleName);
@@ -57,15 +59,15 @@ namespace RazorWebModule
             }
 
             // Tries to get the view with name from module
-            string result = module.GetView(viewName);
+            View view = module.GetView(viewName);
 
-            if (result == null)
+            if (view == null)
             {
                 return Content("404 view not found: " + viewName);
             }
 
             // Return response
-            return Content(result);
+            return Content(view.Render());
         }
 
         /// <summary>
@@ -75,7 +77,7 @@ namespace RazorWebModule
         /// <param name="viewName">view name</param>
         /// <param name="componentName">component name</param>
         /// <returns>returns a rendered component</returns>
-        public virtual ActionResult GetComponent(string moduleName, string viewName, string componentName)
+        public ContentResult GetComponent(string moduleName, string viewName, string componentName)
         {
             // Gets module
             Module module = ModuleRegistry.Get(moduleName);
@@ -86,7 +88,7 @@ namespace RazorWebModule
             }
 
             // Tries to get the view with name from module
-            string component = module.GetComponent(viewName, componentName);
+            IComponent component = module.GetComponent(viewName, componentName);
 
             if (component == null)
             {
@@ -94,7 +96,37 @@ namespace RazorWebModule
             }
 
             // Return response
-            return Content(component);
+            return Content(component.Compile());
+        }
+
+        /// <summary>
+        /// Submits a form to a specific component
+        /// </summary>
+        /// <param name="moduleName">module name</param>
+        /// <param name="viewName">view name</param>
+        /// <param name="componentName">component name</param>
+        /// <param name="data">data from the form</param>
+        /// <returns>Status result</returns>
+        public JsonResult SubmitComponentForm(string moduleName, string viewName, string componentName, Dictionary<string, string> data)
+        {
+            // Gets module
+            Module module = ModuleRegistry.Get(moduleName);
+
+            if (module == null)
+            {
+                return Json("404 module not found: " + moduleName);
+            }
+
+            IComponent component = module.GetComponent(viewName, componentName);
+
+            if (component == null)
+            {
+                return Json("404 component not found: " + componentName);
+            }
+
+            component.ProcessForm(data);
+
+            return Json("204 succes");
         }
     }
 }

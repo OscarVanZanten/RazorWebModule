@@ -13,5 +13,6 @@ namespace RazorWebModule.Components
     {
         string Name { get; }
         string Compile();
+        void ProcessForm(Dictionary<string,string> data);
     }
 }

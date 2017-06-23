@@ -11,6 +11,7 @@ namespace RazorWebModule.Components
     /// </summary>
     public interface IComponentContainer
     {
+        IComponent Component { get; }
         string Name { get; }
         string Render();
     }

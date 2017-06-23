@@ -50,16 +50,11 @@ namespace RazorWebModule
         /// </summary>
         /// <param name="name">name of view</param>
         /// <returns>rendered view</returns>
-        public string GetView(string name)
+        public View GetView(string name)
         {
-            string result = null;
             View view = null;
             Views.TryGetValue(name, out view);
-            if (view != null)
-            {
-                result = view.Render();
-            }
-            return result;
+            return view;
         }
 
         /// <summary>
@@ -68,20 +63,16 @@ namespace RazorWebModule
         /// <param name="viewName">name of the view</param>
         /// <param name="componentName">name of the component</param>
         /// <returns>rendred component</returns>
-        public string GetComponent(string viewName, string componentName)
+        public IComponent GetComponent(string viewName, string componentName)
         {
-            string result = null;
             View view = null;
             Views.TryGetValue(viewName, out view);
+            IComponent component = null;
             if (view != null)
             {
-                IComponentContainer component = view.GetComponent(componentName, view.RootComponent);
-                if (component != null)
-                {
-                    result = component.Render();
-                }
+                component = view.GetComponent(componentName, view.RootComponent).Component;
             }
-            return result;
+            return component;
         }
     }
 }

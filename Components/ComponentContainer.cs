@@ -12,9 +12,9 @@ namespace RazorWebModule.Components
     public class ComponentContainer : IComponentContainer
     {
         // Component
-        private IComponent component;
+        public IComponent Component { get; internal set; }
 
-        public string Name { get { return component.Name; } }
+        public string Name { get { return Component.Name; } }
 
         /// <summary>
         /// bootstrap offsets
@@ -27,7 +27,7 @@ namespace RazorWebModule.Components
         /// <param name="component"></param>
         public ComponentContainer(IComponent component, int[] width, int[] offset)
         {
-            this.component = component;
+            this.Component = component;
             this.width = width;
             this.offset = offset;
 
@@ -60,13 +60,13 @@ namespace RazorWebModule.Components
                             "col-lg-" + this.width[3];
 
             // Div start tag
-            string divStart = "<div id=\"" + component.Name + "\" class=\"" + width + " " + offset + "\">";
+            string divStart = "<div id=\"" + Component.Name + "\" class=\"" + width + " " + offset + "\">";
 
             // Div end tag
             string divEnd = "</div>";
 
             // Html rendered from the view
-            string html = divStart + " " + component.Compile() + " " + divEnd;
+            string html = divStart + " " + Component.Compile() + " " + divEnd;
 
             //return result
             return html;

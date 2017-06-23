@@ -13,12 +13,12 @@ namespace RazorWebModule.Components.Generic
 
         }
 
-        protected override void CollectData()
+        protected override void CollectRenderData()
         {
 
         }
 
-        protected override void ValidateData()
+        protected override void ValidateRenderData()
         {
 
         }
